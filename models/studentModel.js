@@ -49,4 +49,4 @@ const studentSchema = mongoose.Schema(
     }
 )
 
-export const Students = mongoose.model('student-data', studentSchema);
+export const Students = mongoose.model('students', studentSchema);
