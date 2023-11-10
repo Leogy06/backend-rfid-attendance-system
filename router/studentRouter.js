@@ -28,16 +28,16 @@ routes.post('/register', async (req, res) => {
 
         //accumulating student data from inpute user
         const newStudent = {
-            FirstName: req.body.firstName,
-            MiddleName: req.body.middleName,
-            LastName: req.body.lastName,
+            firstName: req.body.firstName,
+            middleName: req.body.middleName,
+            lastName: req.body.lastName,
             suffix: req.body.suffix,
             email: req.body.email,
-            Password: req.body.password,
-            Course: req.body.course,
-            Year: req.body.year,
-            Department: req.body.department,
-            RFID: req.body.rfid
+            password: req.body.password,
+            course: req.body.course,
+            year: req.body.year,
+            department: req.body.department,
+            rfid: req.body.rfid
         }
         
 
