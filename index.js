@@ -7,7 +7,14 @@ import  cors  from "cors";
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+
+app.use(cors({
+    origin: 'http://localhost:3002/',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,  // enable set cookie
+  }));
+  
 
 app.get('/', (req, res) => {
     console.log(req);
