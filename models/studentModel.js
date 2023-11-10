@@ -2,15 +2,15 @@ import mongoose from "mongoose";
 
 const studentSchema = mongoose.Schema(
     {
-        FirstName:{
+        firstName:{
             type: String,
             required: true
         },
-        MiddleName:{
+        middleName:{
             type: String,
             required: true
         },
-        LastName:{
+        lastName:{
             type: String,
             required: true
         },
@@ -22,23 +22,23 @@ const studentSchema = mongoose.Schema(
             type: String,
             required: true
         },
-        Password:{
+        password:{
             type: String,
             required: true
         },
-        Course:{
+        course:{
             type: String,
             required: true
         },
-        Year:{
+        year:{
+            type: Number,
+            required: true
+        },
+        department:{
             type: String,
             required: true
         },
-        Department:{
-            type: String,
-            required: true
-        },
-        RFID:{
+        rfid:{
             type: Number,
             required: true,
             unique: true
@@ -49,4 +49,4 @@ const studentSchema = mongoose.Schema(
     }
 )
 
-export const Students = mongoose.model('students', studentSchema);
+export const Students = mongoose.model('student-data', studentSchema);

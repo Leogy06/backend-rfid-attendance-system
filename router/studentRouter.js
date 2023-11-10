@@ -2,6 +2,7 @@ import express from 'express';
 import { Students } from '../models/studentModel.js';
 
 const routes = express.Router();
+routes.use(express.json());
 
 //create student
 routes.post('/register', async (req, res) => {
@@ -9,15 +10,15 @@ routes.post('/register', async (req, res) => {
     //if user didnt put value 
     try {
         if (
-            !req.body.FirstName ||
-            !req.body.MiddleName ||
-            !req.body.LastName ||
+            !req.body.firstName ||
+            !req.body.middleName ||
+            !req.body.lastName ||
             !req.body.email ||
-            !req.body.Password ||
-            !req.body.Course ||
-            !req.body.Year ||
-            !req.body.Department ||
-            !req.body.RFID
+            !req.body.password ||
+            !req.body.course ||
+            !req.body.year ||
+            !req.body.department ||
+            !req.body.rfid
         ) {
             return res.status(400).send({
                 message: 'Be sure to fill out the necessary input fields'
@@ -25,18 +26,18 @@ routes.post('/register', async (req, res) => {
         }
         
 
-        //accumulating student data from inpuute user
+        //accumulating student data from inpute user
         const newStudent = {
-            FirstName: req.body.FirstName,
-            MiddleName: req.body.MiddleName,
-            LastName: req.body.LastName,
+            FirstName: req.body.firstName,
+            MiddleName: req.body.middleName,
+            LastName: req.body.lastName,
             suffix: req.body.suffix,
             email: req.body.email,
-            Password: req.body.Password,
-            Course: req.body.Course,
-            Year: req.body.Year,
-            Department: req.body.Department,
-            RFID: req.body.RFID
+            Password: req.body.password,
+            Course: req.body.course,
+            Year: req.body.year,
+            Department: req.body.department,
+            RFID: req.body.rfid
         }
         
 
@@ -97,7 +98,7 @@ routes.put('/modify/:id', async (req, res) => {
       if (Object.keys(changedField).length === 0) 
         {
          return res.status(400).send({
-        message: "you didn't update anytthing", error: error
+        message: "No fields updated", error: error
         });
 
         }
@@ -114,7 +115,7 @@ routes.put('/modify/:id', async (req, res) => {
         //if error server...
     } catch (error) {
         console.error(error.message);
-        res.status(500).send({message:error, Problem:'server'});
+        res.status(500).send({message:error.message, Problem:'server'});
     }
 });
 
