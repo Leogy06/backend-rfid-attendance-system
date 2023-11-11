@@ -10,9 +10,9 @@ app.use(express.json());
 // app.use(cors());
 
 app.use(cors({
-    origin: 'http://localhost:3002/',
+    origin: 'http://127.0.0.1:5500',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,  // enable set cookie
+    credentials: true,
   }));
   
 
