@@ -41,7 +41,7 @@ const studentSchema = mongoose.Schema(
         rfid:{
             type: String,
             required: true,
-            unique: true
+            unique: true,
         },
     },
     {
