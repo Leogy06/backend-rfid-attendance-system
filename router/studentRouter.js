@@ -21,7 +21,7 @@ routes.post('/register', async (req, res) => {
             !req.body.rfid
         ) {
             return res.status(400).send({
-                message: 'Be sure to fill out the necessary input fields'
+                message: 'Necessary Fields are Empty'
             });
         }
         
@@ -43,7 +43,7 @@ routes.post('/register', async (req, res) => {
 
         const student = await Students.create(newStudent);
         
-        return res.status(201).send(student);
+        return res.status(201).send({student: student, success: true});
 
     } catch (error) {
         console.error(error.message);
