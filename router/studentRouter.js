@@ -103,8 +103,12 @@ routes.put('/modify/:id', async (req, res) => {
 
         }
 
+        const updateObject = {};
+        for (const key in changedField) {
+            updateObject[key] = changedField[key]
+        }
 
-        const result = await Students.findByIdAndUpdate(id, changedField);
+        const result = await Students.findByIdAndUpdate(id, { $set: updateObject});
 
         if(!result){
             return res.status(404).json({message:'Cannot find Student'});
