@@ -1,7 +1,7 @@
 import express from 'express';
 import { Students } from '../models/studentModel.js';
 import { Attendance } from "../models/attendance.js";
-import formattedDate from "../date.js"
+import date from "../date.js"
 
 const routes = express.Router();
 routes.use(express.json());
@@ -161,7 +161,7 @@ routes.post('/record-attendance', async (req, res) => {
                 course: student.course,
                 year: student.year,
                 department: student.department,
-                timeIn: formattedDate,
+                timeIn: date,
                 present: true,
             });
 

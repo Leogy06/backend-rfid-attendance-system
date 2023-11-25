@@ -3,6 +3,7 @@ import { PORT,mongodbURL } from "./config.js";
 import mongoose from "mongoose";
 import { studentRoutes } from "./router/studentRouter.js";
 import  cors  from "cors";
+import date from "./date.js";
 
 const app = express();
 
@@ -36,3 +37,5 @@ mongoose
     .catch((error) => {
         console.log(error);
     })
+
+    console.log(date);
