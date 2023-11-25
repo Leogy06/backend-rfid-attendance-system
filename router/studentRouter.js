@@ -1,7 +1,8 @@
 import express from 'express';
 import { Students } from '../models/studentModel.js';
 import { Attendance } from "../models/attendance.js";
-import {utcToZonedTime, format} from 'date-fns-tz';
+import utcToZonedTime from 'date-fns-tz/utcToZonedTime';
+import format from 'date-fns-tz/format';
 
 const routes = express.Router();
 routes.use(express.json());
@@ -158,7 +159,7 @@ routes.post('/record-attendance', async (req, res) => {
         const date = new Date();
         const timezone = 'Asia/Manila';
         const withTime = utcToZonedTime(date, timezone);
-        const formattedDate = format(withTime, 'yyyy-MM-dd HH:mm:ssXX', {timeZone:timezone});
+        const formattedDate = format(withTime, 'yyyy-MM-dd HH:mm:sssXX', {timeZone:timezone});
 
 
         if(student){
