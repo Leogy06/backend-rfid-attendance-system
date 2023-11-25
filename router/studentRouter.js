@@ -158,7 +158,7 @@ routes.post('/record-attendance', async (req, res) => {
         const date = new Date();
         const timezone = 'Asia/Manila';
         const withTime = utcToZonedTime(date, timezone);
-        const formattedDate = format(withTime, 'yyyy-MM-dd HH:mm:ssXXX', {timeZone:timezone});
+        const formattedDate = format(withTime, 'yyyy-MM-dd HH:mm:ssXX', {timeZone:timezone});
 
 
         if(student){
