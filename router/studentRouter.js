@@ -1,8 +1,7 @@
 import express from 'express';
 import { Students } from '../models/studentModel.js';
 import { Attendance } from "../models/attendance.js";
-import utcToZonedTime from 'date-fns-tz/utcToZonedTime';
-import format from 'date-fns-tz/format';
+import formattedDate from "../date.js"
 
 const routes = express.Router();
 routes.use(express.json());
@@ -156,12 +155,6 @@ routes.post('/record-attendance', async (req, res) => {
             return `${student.lastName} ${student.firstName} ${student.middleName || ""} ${student.suffix[0] || ""}.`.trim('');
         }
 
-        const date = new Date();
-        const timezone = 'Asia/Manila';
-        const withTime = utcToZonedTime(date, timezone);
-        const formattedDate = format(withTime, 'yyyy-MM-dd HH:mm:sssXX', {timeZone:timezone});
-
-
         if(student){
             const attendanceRecord = new Attendance({
                 studFullname:studFullname(),
@@ -174,7 +167,7 @@ routes.post('/record-attendance', async (req, res) => {
 
             await attendanceRecord.save();
 
-            res.json({success: true, message: "Recorded Successfully!"})
+            res.json({success: true, message: "Recorded Successfully!"});
         }else{
             res.status(404).json({success: false, message: "Student not found nor Registered"});
         }
