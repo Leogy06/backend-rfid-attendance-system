@@ -1,6 +1,6 @@
 import express from 'express';
 import { Students } from '../models/studentModel.js';
-import { Attendance } from "../models/attendance";
+import { Attendance } from "../models/attendance.js";
 
 const routes = express.Router();
 routes.use(express.json());
@@ -151,20 +151,11 @@ routes.post('/record-attendance', async (req, res) => {
         const student = await Students.findOne({rfid});
 
         function studFullname() {
-            return `${student.lastName} ${student.firstName}${student.middleName}${student.suffix || ""}`.trim('');
+            return `${student.lastName} ${student.firstName} ${student.middleName || ""} ${student.suffix[0] || ""}.`.trim('');
         }
 
-        function date() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = now.getMonth() + 1;
-            const day = now.getDate();
-            const hours = now.getHours();
-            const minutes = now.getMinutes();
-            const seconds = now.getSeconds();
+        const date = new Date();
 
-            return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`
-        }
 
         if(student){
             const attendanceRecord = new Attendance({
@@ -172,7 +163,8 @@ routes.post('/record-attendance', async (req, res) => {
                 course: student.course,
                 year: student.year,
                 department: student.department,
-                timeIn: date(),
+                timeIn: formattedDate,
+                present: true,
             });
 
             await attendanceRecord.save();
@@ -186,7 +178,7 @@ routes.post('/record-attendance', async (req, res) => {
         
     } catch (error) {
         console.error(error);
-        res.status(500).json({ success: false, error: "Internal Erro Server"})
+        res.status(500).json({ success: false, error: "Internal Error Server"})
     }
 });
 
