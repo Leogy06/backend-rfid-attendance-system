@@ -22,9 +22,10 @@ const attendanceSchema = mongoose.Schema(
             type: Date,
             required:true,
         },
-        timeOut:{
-            type: Date,
+        present:{
+            type:Boolean,
             required:true,
+            default: false
         }
     },
     {
