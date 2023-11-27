@@ -182,4 +182,19 @@ routes.post('/record-attendance', async (req, res) => {
     }
 });
 
+//display attendance
+routes.get('/attendances/show' , async (req, res) => {
+    try {
+        const attendance = await Attendance.find({});
+
+        return res.status(200).json({
+            count: attendance.length,
+            attendance: attendance,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({message: error.message, response:"Server isn't responding"})
+    }
+})
+
 export {routes as studentRoutes}
