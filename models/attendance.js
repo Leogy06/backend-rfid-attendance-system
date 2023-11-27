@@ -26,7 +26,12 @@ const attendanceSchema = mongoose.Schema(
             type:Boolean,
             required:true,
             default: false
-        }
+        },
+        rfid:{
+            type:String,
+            required:true,
+            unique:true,
+        },
     },
     {
         timestamps: true
