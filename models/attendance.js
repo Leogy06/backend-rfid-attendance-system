@@ -1,5 +1,20 @@
 import mongoose from "mongoose";
 
+const formatToManilaTime = (date) => {
+    const options = {
+      timeZone: 'Asia/Manila',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    };
+  
+    return new Intl.DateTimeFormat('en-US', options).format(date);
+  };
+
 const attendanceSchema = mongoose.Schema(
     {
         studFullname:{
@@ -21,6 +36,7 @@ const attendanceSchema = mongoose.Schema(
         timeIn:{
             type: Date,
             required:true,
+            get: (value) => formatToManilaTime(value),
         },
         present:{
             type:Boolean,
