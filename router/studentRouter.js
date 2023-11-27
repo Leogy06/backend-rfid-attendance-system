@@ -1,7 +1,6 @@
 import express from 'express';
 import { Students } from '../models/studentModel.js';
 import { Attendance } from "../models/attendance.js";
-import date from "../date.js";
 
 const routes = express.Router();
 routes.use(express.json());
@@ -145,6 +144,7 @@ routes.delete('/delete/:id', async (req, res) => {
 });
 
 //attendance
+const date = new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' });
 routes.post('/record-attendance', async (req, res) => {
     const {rfid} = req.body;
 
