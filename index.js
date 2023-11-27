@@ -3,7 +3,6 @@ import { PORT,mongodbURL } from "./config.js";
 import mongoose from "mongoose";
 import { studentRoutes } from "./router/studentRouter.js";
 import  cors  from "cors";
-import date from "./date.js";
 
 const app = express();
 
@@ -19,7 +18,7 @@ app.use(cors({
 
 app.get('/', (req, res) => {
     console.log(req);
-    return res.status(234).send('Hello!')
+    return res.status(200).send('Hello!')
 })
 
 app.use('/students', studentRoutes);
