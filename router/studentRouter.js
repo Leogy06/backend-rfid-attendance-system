@@ -146,13 +146,14 @@ routes.delete('/delete/:id', async (req, res) => {
 
 //attendance
 routes.post('/record-attendance', async (req, res) => {
-    const {rfid} = req.body.rfid;
+    const {rfid} = req.body;
 
     try {
         const student = await Students.findOne({rfid});
 
         function studFullname() {
-            return `${student.lastName} ${student.firstName} ${student.middleName || ""} ${student.suffix[0] || ""}.`.trim('');
+
+            return `${student.lastName} ${student.firstName} ${student.middleName[0]|| ""}. ${student.suffix||""}`.trim('');
         }
 
         if(student){
@@ -163,13 +164,14 @@ routes.post('/record-attendance', async (req, res) => {
                 department: student.department,
                 timeIn: date,
                 present: true,
+                rfid:rfid,
             });
 
             await attendanceRecord.save();
 
-            res.json({success: true, message: "Recorded Successfully!"});
+            res.json({success: true, message: "Recorded Successfully!", studFullname: attendanceRecord.studFullname});
         }else{
-            res.status(404).json({success: false, message: "Student not found nor Registered"});
+            res.status(404).json({success: false, message: "Student not found, registered nor duplicated"});
         }
 
 
