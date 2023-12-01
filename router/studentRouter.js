@@ -197,4 +197,6 @@ routes.get('/attendances/show' , async (req, res) => {
     }
 })
 
+
+
 export {routes as studentRoutes}
