@@ -8,9 +8,9 @@ const adminSchema = mongoose.Schema(
         },
         middleName:{
             type: String,
-            required : true,
+            required : false,
         },
-        lastname:{
+        lastName:{
             type: String,
             required : true,
         },
@@ -29,10 +29,10 @@ const adminSchema = mongoose.Schema(
             required : true,
         },
 
-        deparment:{
+        department:{
             type: String,
             required : true,
         },
     }
 )
-export const Admin = mongoose.model('admin', adminSchema);
+export const Admins = mongoose.model('admin', adminSchema);

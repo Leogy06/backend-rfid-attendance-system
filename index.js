@@ -5,6 +5,7 @@ import { studentRoutes } from "./router/studentRouter.js";
 import  cors  from "cors";
 import { fileURLToPath } from 'url';
 import { dirname, join } from "path";
+import { adminRoutes } from "./router/admin.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -31,7 +32,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/students', studentRoutes);
-
+app.use('/admin', adminRoutes);
 
 mongoose
     .connect(mongodbURL)

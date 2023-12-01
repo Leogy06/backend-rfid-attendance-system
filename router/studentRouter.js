@@ -12,7 +12,6 @@ routes.post('/register', async (req, res) => {
     try {
         if (
             !req.body.firstName ||
-            !req.body.middleName ||
             !req.body.lastName ||
             !req.body.email ||
             !req.body.password ||
@@ -22,7 +21,7 @@ routes.post('/register', async (req, res) => {
             !req.body.rfid
         ) {
             return res.status(400).send({
-                message: 'Necessary Fields are Empty'
+                message: 'Necessary fields are empty'
             });
         }
         
@@ -43,12 +42,11 @@ routes.post('/register', async (req, res) => {
         
 
         const student = await Students.create(newStudent);
-        
         return res.status(201).send({student: student, success: true});
 
     } catch (error) {
         console.error(error.message);
-        res.status(500).send({message: error.message, response:"Database Error"})
+        res.status(500).send({message: error.message, response: "Database Error"})
     }
 })
 
@@ -144,10 +142,10 @@ routes.delete('/delete/:id', async (req, res) => {
 });
 
 //attendance
-const date = new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' });
+
 routes.post('/record-attendance', async (req, res) => {
     const {rfid} = req.body;
-
+    const date = new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' });
     try {
         const student = await Students.findOne({rfid});
 
@@ -178,7 +176,7 @@ routes.post('/record-attendance', async (req, res) => {
         
     } catch (error) {
         console.error(error);
-        res.status(500).json({ success: false, error: "Internal Error Server"})
+        res.status(500).json({ success: false, error: "Server cannot reach, won't record attendance"})
     }
 });
 
