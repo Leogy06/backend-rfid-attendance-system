@@ -33,6 +33,9 @@ const adminSchema = mongoose.Schema(
             type: String,
             required : true,
         },
+    },
+    {
+        timeStamp: true,
     }
 )
 export const Admins = mongoose.model('admin', adminSchema);
