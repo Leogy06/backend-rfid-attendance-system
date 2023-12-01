@@ -16,4 +16,4 @@ function date() {
     return formattedDate;
     
 }
-export default date();
+export {date as currentDate};
