@@ -1,5 +1,5 @@
 import express from 'express';
-import {Admins} from '../models/admin.js';
+import { Admins } from '../models/admin.js';
 import bcrypt from 'bcrypt';
 
 const routes = express.Router();
@@ -49,7 +49,7 @@ routes.post('/register', async (req, res) => {
 
         const hashedPass = await bcrypt.hash(req.body.password, 10);
 
-        const insertAdmin = {
+        const newAdmin = {
             firstName: req.body.firstName,
             middleName: req.body.middleName || "",
             lastName: req.body.lastName,
@@ -59,7 +59,7 @@ routes.post('/register', async (req, res) => {
             department: req.body.department,
         }
 
-        const admin = await Admins.create(insertAdmin);
+        const admin = await Admins.create(newAdmin);
 
         await admin.save();
 
