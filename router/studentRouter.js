@@ -142,7 +142,6 @@ routes.delete('/delete/:id', async (req, res) => {
 });
 
 //attendance
-
 routes.post('/record-attendance', async (req, res) => {
     const {rfid} = req.body;
     const date = new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' });
