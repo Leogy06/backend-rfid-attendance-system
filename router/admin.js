@@ -12,7 +12,7 @@ routes.use(express.json());
 
 // Configure express-session middleware
 routes.use(session({
-  secret: mySecretKey,
+  secret: mySecretKey(),
   resave: false,
   saveUninitialized: false,
 }));
@@ -51,7 +51,7 @@ passport.serializeUser((admin, done) => {
 });
 
 passport.deserializeUser((email, done) => {
-  Admins.findById(email, (err, admin) => {
+  Admins.findById(email).exec((err, admin) => {
     done(err, admin);
   });
 });
