@@ -177,11 +177,11 @@ li {
 }
 
 /*Attendance List serction  */
-.attendance {
+.dashboard {
   margin-top: 20px;
   text-transform: capitalize;
 }
-.attendance-list {
+.dashboard-bulletin {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
@@ -189,115 +189,9 @@ li {
   border-radius: 10px;
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 }
-.table {
-  border-collapse: collapse;
-  margin: 25px 0;
-  font-size: 15px;
-  min-width: 100%;
-  overflow: hidden;
-  border-radius: 5px 5px 0 0;
-}
-table thead tr {
-  color: #fff;
-  background: #4fb9af;
-  text-align: left;
-  font-weight: bold;
-}
-.table th,
-.table td {
-  padding: 12px 15px;
-}
-.table tbody tr {
-  border-bottom: 1px solid #ddd;
-}
-.table tbody tr:nth-of-type(odd) {
-  background: #f3f3f3;
-}
-.table tbody tr.active {
-  font-weight: bold;
-  color: #4fb9af;
-}
-.table tbody tr:last-of-type {
-  border-bottom: 2px solid #4fb9af;
-}
-.table button {
-  padding: 6px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  background: transparent;
-  border: 1px solid #4fb9af;
-}
-.table button:hover {
-  background: #4fb9af;
-  color: #fff;
-  transition: 0.5rem;
-}
 
 a[aria-current="page"] {
   font-weight: bold;
   background-color: #4fb9af;
   color: #fff;
-}
-
-/*if password mismatch*/
-.password-mismatch {
-  border: 1px solid red !important;
-}
-
-.password-match {
-  border: 1px solid green !important;
-}
-
-/*add student do not delete*/
-.flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-#record-attendance {
-  background-color: #4fb9af;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 5px;
-}
-#record-attendance:hover {
-  background-color: #34af6d;
-  transition-duration: 0.9ms;
-}
-/*dont delete above!*/
-
-#rfid-container {
-  position: sticky;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  height: 100vh;
-  /* width: 280px; */
-  background: #fff;
-  transition: 1s;
-  width: 280px;
-  padding: 20px 3px;
-}
-
-.hidden {
-  display: none;
-}
-.visible {
-  display: block;
-}
-.flex-center {
-  display: flex;
-  flex-direction: column;
-}
-#fail {
-  border-radius: 5px;
-  margin: 3px;
-}
-
-#success {
-  border-radius: 5px;
-  margin: 3px;
 }
