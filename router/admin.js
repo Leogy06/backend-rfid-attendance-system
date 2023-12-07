@@ -51,4 +51,8 @@ routes.get('/manageStudent', async (req, res) => {
   res.render('../src/views/admin/ManageStudent.ejs')
 })
 
+routes.get('/event', async (req, res) => {
+  res.render('../src/views/admin/event.ejs')
+})
+
 export { routes as adminRoutes };
