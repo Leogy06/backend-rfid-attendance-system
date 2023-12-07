@@ -26,13 +26,13 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" aria-current="page">
               <i class="fas fa-menorah"></i>
               <span class="nav-item">Dashboard</span>
             </a>
           </li>
           <li>
-            <a href="#" aria-current="page">
+            <a href="#">
               <i class="fas fa-chart-bar"></i>
               <span class="nav-item">Attendance</span>
             </a>
@@ -67,7 +67,7 @@
 
       <section class="main">
         <div class="main-top">
-          <h2>Attendance section</h2>
+          <h2>Welcome name</h2>
           <span
             ><form class="d-flex" role="search">
               <input
@@ -84,65 +84,13 @@
         <section class="attendance">
           <div class="attendance-list">
             <div class="flex">
-              <h2>Event Name</h2>
-              <span>
-                <button type="menu" id="record-attendance">
-                  Record Attendance
-                </button>
-              </span>
+              <h2>Dashboard</h2>
             </div>
-            <table class="table">
-              <div class="hidden text-bg-danger" id="error-table-render"></div>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Year</th>
-                  <th>Course</th>
-                  <th>Department</th>
-                  <th>Present</th>
-                  <th>Timein</th>
-                  <th>Timeout</th>
-                  <th>School Year</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
+            <div>Attendance Report</div>
           </div>
         </section>
       </section>
-
-      <div id="rfid-container" class="hidden">
-        <form method="post" id="attendance-form">
-          <div class="flex-center">
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addon1"
-                ><i class="fa-regular fa-credit-card"></i
-              ></span>
-              <input
-                type="text"
-                id="rfid-input"
-                class="form-control"
-                placeholder="RFID"
-                aria-label="rfid"
-                aria-describedby="basic-addon1"
-                name="rfid"
-              />
-            </div>
-            <button type="submit" class="btn btn-success">Record</button>
-          </div>
-        </form>
-        <div class="py-3 text-center" id="record-result">
-          <div id="default-message" class="visible">
-            Result will show here.<br /><i class="fa-solid fa-arrow-down"></i>
-          </div>
-          <div id="success" class="hidden text-bg-success"></div>
-          <div id="fail" class="hidden text-bg-warning">
-            Invalid login, RFID tag duplicate nor Registered
-          </div>
-        </div>
-      </div>
     </div>
-    <script src="../../../public/js/attendance.js"></script>
+    <script src="/js/attendance.js"></script>
   </body>
 </html>
