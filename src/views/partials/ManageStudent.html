@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Manage Student</title>
+    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../navbarcss/ManageStudent.css" />
+    <!-- Font Awesome Cdn Link -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="containerCss">
+      <nav>
+        <ul>
+          <li>
+            <a href="#" class="logo">
+              <img src="../images/SSC logo.png" />
+              <span class="nav-item">SSC</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-menorah"></i>
+              <span class="nav-item">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="attendance.html">
+              <i class="fas fa-chart-bar"></i>
+              <span class="nav-item">Attendance</span>
+            </a>
+          </li>
+          <li id="manage-student">
+            <a href="#" aria-current="page">
+              <i class="fas fa-user"></i>
+              <span class="nav-item">Manage Student</span>
+            </a>
+          </li>
+          <li>
+            <a href="event.html">
+              <i class="fa-solid fa-calendar-days fas"></i>
+              <span class="nav-item">Event</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-cog"></i>
+              <span class="nav-item"> Setting</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="logout">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="nav-item" id="logout">Log out</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <section class="main">
+        <div class="main-top">
+          <h2>Manage Student</h2>
+          <span
+            ><form class="d-flex" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                id="searchInput"
+                autocomplete="off"
+              /></form
+          ></span>
+          <i class="fas fa-user-cog"></i>
+        </div>
+
+        <section class="attendance">
+          <div class="attendance-list">
+            <div class="flex">
+              <h2>Student List</h2>
+              <span>
+                <button
+                  type="menu"
+                  id="create-button"
+                  onclick="createStudent()"
+                >
+                  Add Student
+                </button>
+              </span>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Year</th>
+                  <th>Course</th>
+                  <th>Department</th>
+                  <th>RFID</th>
+                  <th>Operation</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </div>
+    <div id="overlay">
+      <div class="form-container">
+        <div id="btn-container">
+          <button type="reset" id="close-button" onclick="closeForm()">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <h2 class="text-center pb-3">Add Student Data</h2>
+        <form id="create-form" method="post">
+          <div class="form-floating">
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Email"
+              name="email"
+              autocomplete="off"
+            />
+            <label for="floatingEmail">Email</label>
+          </div>
+
+          <div class="form-floating">
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="password"
+              name="password"
+            />
+            <label for="floatingPassword">Password</label>
+          </div>
+
+          <div class="form-floating">
+            <input
+              type="password"
+              class="form-control"
+              id="password-match"
+              placeholder="password-match"
+              name="password-match"
+            />
+            <label for="floatingPassword-match">Confirm Password</label>
+          </div>
+
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control text-capitalize"
+              id="firstName"
+              placeholder="firstName"
+              name="firstName"
+            />
+            <label for="firstName">First name</label>
+          </div>
+
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control text-capitalize"
+              id="middleName"
+              placeholder="middleName"
+              name="middleName"
+              autocapitalize="words"
+            />
+            <label for="floatingmiddleName">Middle Name</label>
+          </div>
+
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="suffix"
+              placeholder="suffix"
+              name="suffix"
+            />
+            <label for="floatingsuffix">suffix</label>
+          </div>
+
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control text-capitalize"
+              id="lastName"
+              placeholder="lastName"
+              name="lastName"
+            />
+            <label for="floatinglastName">Last Name</label>
+          </div>
+
+          <div class="form-floating">
+            <input
+              type="rfid"
+              class="form-control"
+              id="rfid"
+              placeholder="rfid"
+              name="rfid"
+            />
+            <label for="floatingrfid">RFID</label>
+          </div>
+
+          <div class="form-floating">
+            <input
+              type="number"
+              class="form-control text-uppercase"
+              id="year"
+              placeholder="year"
+              name="year"
+            />
+            <label for="floatingdepartment">Year</label>
+          </div>
+
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control text-uppercase"
+              id="course"
+              placeholder="course"
+              name="course"
+            />
+            <label for="floatingcourse">Course</label>
+          </div>
+
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control text-uppercase"
+              id="department"
+              placeholder="department"
+              name="department"
+            />
+            <label for="floatingdepartment">Department</label>
+          </div>
+
+          <div id="btn-container">
+            <button type="submit" id="create-btn" class="btn btn-success">
+              Add Student
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!--Update form-->
+    <div id="overlay-update">
+      <div class="form-container">
+        <div id="btn-container">
+          <button type="reset" id="close-button" onclick="closeFormUpdate()">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <h1 class="text-center">Update Student Data</h1>
+        <form id="update-form" method="post">
+          <div class="form-floating mb-3">
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              autocomplete="off"
+              placeholder="name@example.com"
+            />
+            <label for="email">Email address</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              type="password"
+              class="form-control"
+              id="passwordUpdate"
+              placeholder="password"
+              name="password"
+            />
+            <label for="password">Password</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              type="password"
+              class="form-control"
+              id="passwordMatchUpdate"
+              placeholder="password"
+              name="password"
+            />
+            <label for="password">Confirm Password</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="firstNameUpdate"
+              placeholder="firstName"
+              name="firstName"
+            />
+            <label for="firstName">First name</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control text-uppercase"
+              id="middleNameUpdate"
+              placeholder="middleName"
+              name="middleName"
+            />
+            <label for="middleName">Middle name</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="suffixUpdate"
+              placeholder="suffix"
+              name="suffix"
+            />
+            <label for="suffix">Suffix</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="lastNameUpdate"
+              placeholder="last name"
+              name="lastName"
+            />
+            <label for="lastName">Last name</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="rfidUpdate"
+              placeholder="rfid"
+              name="rfid"
+            />
+            <label for="rfid">RFID</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              type="number"
+              class="form-control"
+              id="yearUpdate"
+              placeholder="Year"
+              name="year"
+            />
+            <label for="year">Year</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="courseUpdate"
+              placeholder="course"
+              name="course"
+            />
+            <label for="course">Course</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="departmentUpdate"
+              placeholder="department"
+              name="department"
+            />
+            <label for="department">Department</label>
+          </div>
+          <div id="btn-container">
+            <button type="submit" id="update-btn">Update Student</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="../navbarjs/ManageStudent.js"></script>
+  </body>
+</html>
