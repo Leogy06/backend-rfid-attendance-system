@@ -52,6 +52,7 @@ a {
   color: rgb(85, 83, 83);
   display: table;
   padding: 10px;
+  text-decoration: none;
 }
 nav .fas {
   position: relative;
@@ -78,13 +79,20 @@ a:hover i {
   bottom: 0;
 }
 
-.container {
+.containerCss {
   display: flex;
-}
-
-/* MAin Section */
-.main {
   position: relative;
+}
+li {
+  list-style: none;
+  margin-left: -40px;
+}
+/* MAin Section */
+.text-center {
+  text-align: center;
+}
+.main {
+  position: fixe;
   padding: 20px;
   width: 100%;
 }
@@ -98,6 +106,12 @@ a:hover i {
   margin: 10px 30px;
   color: rgb(110, 109, 109);
   cursor: pointer;
+}
+.main-top span {
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  width: max-content;
 }
 .main .users {
   display: flex;
@@ -151,6 +165,15 @@ a:hover i {
   background: #4fb9af;
   color: #fff;
   transition: 0.5s;
+}
+.btn-delete {
+  border: 1px solid #bf0a30 !important;
+  color: #333 !important;
+  margin: 0 5px;
+}
+.btn-delete:hover {
+  background-color: #bf0a30 !important;
+  color: #fff !important;
 }
 
 /*Attendance List serction  */
@@ -210,14 +233,71 @@ table thead tr {
   transition: 0.5rem;
 }
 
-/*student list*/
-.container {
-  position: relative;
+a[aria-current="page"] {
+  font-weight: bold;
+  background-color: #4fb9af;
+  color: #fff;
 }
-.add-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 24px;
+
+/*if password mismatch*/
+.password-mismatch {
+  border: 1px solid red !important;
+}
+
+.password-match {
+  border: 1px solid green !important;
+}
+
+/*add student do not delete*/
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#record-attendance {
+  background-color: #4fb9af;
+  color: white;
+  padding: 10px 15px;
+  border: none;
   cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+#record-attendance:hover {
+  background-color: #34af6d;
+  transition-duration: 0.9ms;
+}
+/*dont delete above!*/
+
+#rfid-container {
+  position: sticky;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  /* width: 280px; */
+  background: #fff;
+  transition: 1s;
+  width: 280px;
+  padding: 20px 3px;
+}
+
+.hidden {
+  display: none;
+}
+.visible {
+  display: block;
+}
+.flex-center {
+  display: flex;
+  flex-direction: column;
+}
+#fail {
+  border-radius: 5px;
+  margin: 3px;
+}
+
+#success {
+  border-radius: 5px;
+  margin: 3px;
 }

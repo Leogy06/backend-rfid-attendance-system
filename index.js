@@ -4,13 +4,6 @@ import mongoose from "mongoose"
 import { studentRoutes } from "./router/studentRouter.js"
 import  cors  from "cors"
 import { adminRoutes } from "./router/admin.js"
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import path from "path"
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
 
 const app = express()
 
@@ -24,8 +17,17 @@ app.use(cors({
     credentials: true,
   }));
 
-app.use(express.urlencoded({ extended:true}));
-app.use(express.static(path.join(__dirname, '../frontend')));
+
+
+app.set('view-engine', 'ejs')
+
+app.use(express.static('public'));
+
+app.use(express.urlencoded({ extended:false}));
+
+app.get('/', (req, res) => {
+    res.render('../src/views/home.ejs')
+})
 
 app.use('/students', studentRoutes);
 app.use('/admin', adminRoutes);
