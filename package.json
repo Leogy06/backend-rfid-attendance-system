@@ -13,7 +13,7 @@
     "gitignore": "^0.7.0",
     "jsonwebtoken": "^9.0.2",
     "moment-timezone": "^0.5.43",
-    "mongoose": "^8.0.0",
+    "mongoose": "^8.0.2",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0"
   },
