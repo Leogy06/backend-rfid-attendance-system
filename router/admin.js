@@ -5,6 +5,8 @@ import passport from 'passport';
 import LocalStrategy from 'passport-local'
 import session from 'express-session';
 import { mySecretKey } from '../config.js';
+import path from 'path';
+
 
 const routes = express.Router();
 
@@ -41,7 +43,7 @@ passport.use(new LocalStrategy({
       return done(null, false, { message: 'Password does not match email' });
     }
   } catch (error) {
-    return done(error);
+    return done(error).res({respose: "server fault, fail login"});
   }
 }));
 
@@ -51,21 +53,11 @@ passport.serializeUser((admin, done) => {
 });
 
 passport.deserializeUser((email, done) => {
-  Admins.findById(email).exec((err, admin) => {
-    done(err, admin);
-  });
+  Admins.findOne({email:email}).exec()
+    .then(admin => done(null, admin))
+    .catch(err => done(err));
 });
 
-// Login route using Passport.js
-routes.post('/login', passport.authenticate('local', {
-  successRedirect: '/home',
-  failureRedirect: '/login',
-}));
-
-routes.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
-});
 
 // Define isAuthenticated middleware
 const isAuthenticated = (req, res, next) => {
@@ -81,16 +73,29 @@ const isAuthenticated = (req, res, next) => {
   res.redirect('/login');
 };
 
-// Usage in your routes
+// Login route using Passport.js
+
+routes.post('/login', passport.authenticate('local', {
+  successRedirect: '/home.html',
+  failureRedirect: '/login.html',
+}));
+
+
+
+routes.get('/logout', (req, res) => {
+  req.logout((err) => {
+  if (err) {
+    console.log("Unable to logout", err)
+    return res.status(500).send('Internal Server Error')
+  }
+    res.redirect('/login')
+  })
+})
+
+//if success login
 routes.get('/home', isAuthenticated, (req, res) => {
-
-   // Assuming firstName is a property in your Admins model
-  res.send('Home page: ' + req.admin.firstName);
-});
-
-
-routes.get('/home', isAuthenticated, (req, res) => {
-  res.send('Home page: ' + req.admin.firstName); // Assuming firstName is a property in your Admins model
+  console.log('Successful login', req.user.email);
+  res.sendFile(path.join(__dirname, '../frontend/home.html'));
 });
 
 // Admin registration route

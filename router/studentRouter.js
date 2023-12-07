@@ -42,7 +42,7 @@ routes.post('/register', async (req, res) => {
         
 
         const student = await Students.create(newStudent);
-        return res.status(201).send({student: student, success: true});
+        return res.status(201).send({response: 'student added succesfully ',student: student, success: true});
 
     } catch (error) {
         console.error(error.message);
