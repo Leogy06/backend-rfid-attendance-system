@@ -52,24 +52,25 @@
           <li>
             <a href="#">
               <i class="fas fa-cog"></i>
-              <span class="nav-item"> Setting</span>
+              <span class="nav-item">Setting</span>
             </a>
           </li>
-
-          <li>
-            <a href="#" class="logout">
-              <i class="fas fa-sign-out-alt"></i>
-              <span class="nav-item" id="logout">Log out</span>
+          <li class="logout">
+            <a href="#">
+              <form action="/admin/logout?_method=DELETE" method="POST">
+                <button type="submit">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <span class="nav-item">Logout</span>
+                </button>
+              </form>
             </a>
           </li>
         </ul>
       </nav>
-
       <section class="main">
         <div class="main-top">
           <h2>Welcome <%= name %></h2>
         </div>
-
         <section class="dashboard">
           <div class="dashboard-bulletin">
             <div class="flex">
