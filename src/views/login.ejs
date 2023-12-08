@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/login.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,7 +31,12 @@
         </div>
         <div class="center-y d-flex align-items-center" style="width: 450px">
           <h1 id="welcome">SIGN IN</h1>
-          <form id="login-form">
+          <form id="login-form" action="/admin/login" method="POST">
+            <% if (messages.error) { %>
+            <div class="alert alert-danger text-center" role="alert">
+              <%= messages.error %>
+            </div>
+            <% } %>
             <div class="input-group mb-3 text-dark">
               <span class="input-group-text"
                 ><i class="fa fa-envelope"></i
@@ -46,7 +51,7 @@
                   required
                   name="email"
                 />
-                <label for="floatingInputGroup1">Email </label>
+                <label for="email">Email</label>
               </div>
             </div>
             <div class="input-group mb-3 text-dark">
@@ -58,9 +63,10 @@
                   id="password"
                   placeholder="password
                     "
+                  name="password"
                   required
                 />
-                <label for="floatingInputGroup1">Password</label>
+                <label for="password">Password</label>
               </div>
             </div>
             <a
@@ -82,6 +88,5 @@
         </div>
       </div>
     </div>
-    <script src="/js/login.js"></script>
   </body>
 </html>
