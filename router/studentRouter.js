@@ -144,7 +144,6 @@ routes.delete('/delete/:id', async (req, res) => {
 //attendance
 routes.post('/record-attendance', async (req, res) => {
     const {rfid} = req.body;
-    const date = new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' });
     try {
         const student = await Students.findOne({rfid});
 
@@ -159,7 +158,7 @@ routes.post('/record-attendance', async (req, res) => {
                 course: student.course,
                 year: student.year,
                 department: student.department,
-                timeIn: date,
+                timeIn: Date.now(),
                 present: true,
                 rfid:rfid,
             });
