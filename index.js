@@ -2,35 +2,24 @@ import express from "express"
 import { PORT,mongodbURL } from "./config.js"
 import mongoose from "mongoose"
 import { studentRoutes } from "./router/studentRouter.js"
-import  cors  from "cors"
 import { adminRoutes } from "./router/admin.js"
 
 const app = express()
 
 app.use(express.json())
 
-// app.use(cors())
-
-app.use(cors({
-    origin: 'http://127.0.0.1:5500',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-  }));
-
-
-
 app.set('view-engine', 'ejs')
 
-app.use(express.static('public'));
+app.use(express.static('public'))
 
-app.use(express.urlencoded({ extended:false}));
+app.use(express.urlencoded({ extended:false}))
 
 app.get('/', (req, res) => {
-    res.render('../src/views/home.ejs')
+    res.render('../src/views/home.ejs', {name: 'Leogy'})
 })
 
-app.use('/students', studentRoutes);
-app.use('/admin', adminRoutes);
+app.use('/students', studentRoutes)
+app.use('/admin', adminRoutes)
 
 mongoose
     .connect(mongodbURL)
