@@ -38,7 +38,7 @@ const renderTableRows = (students) => {
 
 const getFullName = (student) => {
   const { firstName, middleName, lastName, suffix } = student;
-  return `${firstName} ${middleName || ""} ${lastName} ${suffix || ""}`.trim();
+  return `${firstName} ${middleName[0] || ""}. ${lastName} ${suffix || ""}`.trim();
 };
 
 
