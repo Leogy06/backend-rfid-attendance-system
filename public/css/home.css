@@ -18,10 +18,9 @@ nav {
   height: 100vh;
   left: 0;
   width: 90px;
-  /* width: 280px; */
   background: #fff;
   overflow: hidden;
-  transition: 1s;
+  transition: 0.4s;
 }
 nav:hover {
   width: 280px;
@@ -77,22 +76,44 @@ a:hover i {
 .logout {
   position: absolute;
   bottom: 0;
+  background-color: #fff;
+  color: rgb(85, 83, 83);
+}
+
+.logout a {
+  text-decoration: none;
+}
+
+.logout:hover i {
+  color: #333;
+  transition: 0.5s;
 }
 
 .containerCss {
   display: flex;
   position: relative;
 }
+
 li {
   list-style: none;
+  position: relative;
   margin-left: -40px;
+  width: fit-content;
+}
+
+li a form button {
+  background-color: #fff;
+}
+
+li a form button:hover {
+  background-color: #eee;
 }
 /* MAin Section */
 .text-center {
   text-align: center;
 }
 .main {
-  position: fixe;
+  position: relative;
   padding: 20px;
   width: 100%;
 }
