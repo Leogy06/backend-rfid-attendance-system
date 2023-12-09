@@ -81,6 +81,10 @@ body {
   justify-content: center;
   align-items: center;
 }
-.btn {
+.btn-login {
+  justify-content: center;
+  display: flex;
+}
+#btn-login {
   width: 200px;
 }

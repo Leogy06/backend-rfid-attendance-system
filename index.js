@@ -7,6 +7,7 @@ import passport from "passport";
 import session from "express-session";
 import flash from "express-flash";
 import { mySecretKey } from "./config.js";
+import methodOverride from "method-override";
 
 const app = express();
 
@@ -30,7 +31,7 @@ app.set("view-engine", "ejs");
 app.use(express.static("public"));
 
 app.use(express.urlencoded({ extended: false }));
-app.use(passport.initialize());
+app.use(flash());
 app.use(
   session({
     secret: mySecretKey(),
@@ -38,8 +39,9 @@ app.use(
     saveUninitialized: false,
   })
 );
-app.use(flash());
+app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride("_method"));
 
 app.use("/students", studentRoutes);
 app.use("/admin", adminRoutes);

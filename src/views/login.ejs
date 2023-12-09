@@ -29,7 +29,7 @@
           />
           <h1 id="welcome">Welcome Back!</h1>
         </div>
-        <div class="center-y d-flex align-items-center" style="width: 450px">
+        <div class="center-y">
           <h1 id="welcome">SIGN IN</h1>
           <form id="login-form" action="/admin/login" method="POST">
             <% if (messages.error) { %>
@@ -69,21 +69,20 @@
                 <label for="password">Password</label>
               </div>
             </div>
-            <a
-              class="link-offset-2 link-offset-4-hover link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-light"
-              href="#"
-              id="forgot-link"
-            >
-              Forgot Password?
-            </a>
-            <br />
-            <button
-              type="submit"
-              class="btn btn-outline-dark mt-3"
-              id="btn-login"
-            >
-              Login
-            </button>
+            <p class="text-center">
+              <a
+                class="link-offset-2 link-offset-4-hover link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-light"
+                href="#"
+                id="forgot-link"
+              >
+                Forgot Password?
+              </a>
+            </p>
+            <div class="btn-login">
+              <button type="submit" class="btn btn-dark mt-3" id="btn-login">
+                Login
+              </button>
+            </div>
           </form>
         </div>
       </div>

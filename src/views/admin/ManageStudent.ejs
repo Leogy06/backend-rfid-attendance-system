@@ -25,7 +25,7 @@
             </a>
           </li>
           <li>
-            <a href="/">
+            <a href="/admin/dashboard">
               <i class="fas fa-menorah"></i>
               <span class="nav-item">Dashboard</span>
             </a>
@@ -55,10 +55,14 @@
             </a>
           </li>
 
-          <li>
-            <a href="#" class="logout">
-              <i class="fas fa-sign-out-alt"></i>
-              <span class="nav-item" id="logout">Log out</span>
+          <li class="logout">
+            <a href="#">
+              <form action="/admin/logout?_method=DELETE" method="POST">
+                <button type="submit">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <span class="nav-item">Logout</span>
+                </button>
+              </form>
             </a>
           </li>
         </ul>
