@@ -1,17 +1,10 @@
 import express from "express";
 import { Admins } from "../models/admin.js";
 import bcrypt from "bcrypt";
-import flash from "express-flash";
 import passport from "../passport-config.js";
-import methodOverride from "method-override";
 
 const routes = express.Router();
 routes.use(express.json());
-
-routes.use(passport.initialize());
-routes.use(passport.session());
-routes.use(flash());
-routes.use(methodOverride("_method"));
 
 routes.get("/login", checkNotAuthenticated, (req, res) => {
   res.render("../src/views/login.ejs");
