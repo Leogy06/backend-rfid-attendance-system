@@ -162,18 +162,9 @@ li {
   border: 1px solid #4fb9af;
 }
 .users .card button:hover {
-  background: #4fb9af;
+  background: red;
   color: #fff;
   transition: 0.5s;
-}
-.btn-delete {
-  border: 1px solid #bf0a30 !important;
-  color: #333 !important;
-  margin: 0 5px;
-}
-.btn-delete:hover {
-  background-color: #bf0a30 !important;
-  color: #fff !important;
 }
 
 /*Attendance List serction  */
@@ -207,6 +198,11 @@ table thead tr {
 .table td {
   padding: 12px 15px;
 }
+
+.table td {
+  font-size: 16px;
+}
+
 .table tbody tr {
   border-bottom: 1px solid #ddd;
 }
@@ -221,16 +217,42 @@ table thead tr {
   border-bottom: 2px solid #4fb9af;
 }
 .table button {
+  margin-left: 3px;
+}
+.btn-edit {
   padding: 6px 20px;
   border-radius: 10px;
   cursor: pointer;
   background: transparent;
   border: 1px solid #4fb9af;
 }
-.table button:hover {
+.btn-edit:hover {
   background: #4fb9af;
   color: #fff;
   transition: 0.5rem;
+}
+
+.btn-delete {
+  border: 1px solid #bf0a30;
+  padding: 6px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: transparent;
+}
+.btn-delete:hover {
+  background-color: #bf0a30;
+  color: #fff;
+}
+.btn-attendance {
+  border: 1px dotted #34af6d;
+  padding: 6px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: transparent;
+}
+.btn-attendance:hover {
+  background-color: #34af6d;
+  color: #fff;
 }
 
 a[aria-current="page"] {
@@ -239,22 +261,16 @@ a[aria-current="page"] {
   color: #fff;
 }
 
-/*if password mismatch*/
-.password-mismatch {
-  border: 1px solid red !important;
-}
-
-.password-match {
-  border: 1px solid green !important;
-}
-
-/*add student do not delete*/
 .flex {
   display: flex;
-  align-items: center;
+  flex-direction: row-reverse;
   justify-content: space-between;
 }
-#record-attendance {
+
+.btn-span {
+  right: 0;
+}
+#btn-event {
   background-color: #4fb9af;
   color: white;
   padding: 10px 15px;
@@ -263,23 +279,26 @@ a[aria-current="page"] {
   font-size: 16px;
   border-radius: 5px;
 }
-#record-attendance:hover {
+#btn-event:hover {
   background-color: #34af6d;
   transition-duration: 0.9ms;
 }
 /*dont delete above!*/
 
-#rfid-container {
-  position: sticky;
+#event-container {
+  position: relative;
   left: 0;
   top: 0;
   bottom: 0;
-  height: 100vh;
   /* width: 280px; */
-  background: #fff;
+  background: #eee;
   transition: 1s;
-  width: 280px;
-  padding: 20px 3px;
+  width: 50%;
+  height: 100vh;
+  padding: 20px 30px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  color: #333;
+  border-radius: 5px;
 }
 
 .hidden {
@@ -301,17 +320,21 @@ a[aria-current="page"] {
   border-radius: 5px;
   margin: 3px;
 }
-
-#create-btn {
-  background-color: #4fb9af;
-  padding: 10px;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
+.box {
+  background-color: #333;
+  width: 1000px;
 }
-#create-btn:hover {
-  background-color: #5ba9a1;
-  padding: 10px;
-  color: #fff;
-  border-radius: 5px;
+
+#close-btn {
+  color: black;
+}
+#close-btn :hover {
+  transform: scale(1.1);
+  background-color: #bf0a30;
+}
+#btn-create-event {
+  width: 200px;
+}
+#btn-event-container {
+  justify-content: center;
 }

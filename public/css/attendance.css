@@ -149,7 +149,7 @@ li {
   background: rgb(223, 223, 223);
 }
 .users td {
-  font-size: 14px;
+  font-size: 16px;
   padding-right: 15px;
 }
 .users .card button {
@@ -208,7 +208,7 @@ table thead tr {
   padding: 12px 15px;
 }
 .table td {
-  font-size: 13px;
+  font-size: 16px;
 }
 .table tbody tr {
   border-bottom: 1px solid #ddd;

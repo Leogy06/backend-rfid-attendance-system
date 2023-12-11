@@ -15,7 +15,6 @@ app.use(express.json());
 
 mongoose
   .connect(mongodbURL)
-
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Listening on port ${PORT}`);
