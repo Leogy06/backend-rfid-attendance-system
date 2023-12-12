@@ -119,20 +119,30 @@ routes.get("/sendEvent", checkAuthenticated, async (req, res) => {
 
 routes.post("/event", checkAuthenticated, async (req, res) => {
   try {
+    const readableResponse = (readableResponse) => {
+      return readableResponse
+        .replace(/([A-Z])/g, " $1")
+        .replace(/^./, (str) => str.toUpperCase());
+    };
     // Check for required fields
     const requiredFields = [
-      "Title",
-      "Location",
-      "Starting schoolYear",
-      "Ending schoolYear",
-      "Time begin",
-      "Time end",
+      "title",
+      "location",
+      "startingSchoolYear",
+      "endingSchoolYear",
+      "timeBegin",
+      "timeEnd",
     ];
     const missingFields = requiredFields.filter((field) => !req.body[field]);
 
     if (missingFields.length > 0) {
+      const readableMessage = missingFields.map(readableResponse);
+      const emphasizedFields = readableMessage.map(
+        (field) => `<b>${field}</b>`
+      );
+
       return res.status(400).send({
-        message: `This fields must not empty ${missingFields.join(", ")}`,
+        message: `This fields must not empty: ${emphasizedFields.join(", ")}`,
       });
     }
 
