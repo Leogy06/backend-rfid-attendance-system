@@ -121,18 +121,18 @@ routes.post("/event", checkAuthenticated, async (req, res) => {
   try {
     // Check for required fields
     const requiredFields = [
-      "title",
-      "location",
-      "startingSchoolYear",
-      "endingSchoolYear",
-      "timeBegin",
-      "timeEnd",
+      "Title",
+      "Location",
+      "Starting schoolYear",
+      "Ending schoolYear",
+      "Time begin",
+      "Time end",
     ];
     const missingFields = requiredFields.filter((field) => !req.body[field]);
 
     if (missingFields.length > 0) {
       return res.status(400).send({
-        message: `Required field(s) are empty: ${missingFields.join(", ")}`,
+        message: `This fields must not empty ${missingFields.join(", ")}`,
       });
     }
 
@@ -158,9 +158,9 @@ routes.post("/event", checkAuthenticated, async (req, res) => {
       location: newEvent.location,
       startingSchoolYear: newEvent.startingSchoolYear,
       endingSchoolYear: newEvent.endingSchoolYear,
-      endingSchoolYear: newEvent.description,
-      endingSchoolYear: newEvent.timeBegin,
-      endingSchoolYear: newEvent.timeEnd,
+      description: newEvent.description,
+      timeBegin: newEvent.timeBegin,
+      timeEnd: newEvent.timeEnd,
     });
   } catch (error) {
     console.error(error);
@@ -208,5 +208,27 @@ routes.put(
     }
   }
 );
+
+//delete an event
+routes.delete("/event/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await Events.findByIdAndDelete(id);
+
+    if (!result) {
+      return res
+        .status(404)
+        .json({ message: "Can't delete, event do not exist." });
+    } else {
+      return res.status(200).json({ message: "Student deleted" });
+    }
+  } catch (error) {
+    console.error(error);
+    console.log(error);
+    res
+      .status(500)
+      .json({ error: error, message: "Can't delete due to server error" });
+  }
+});
 
 export { routes as adminRoutes };
