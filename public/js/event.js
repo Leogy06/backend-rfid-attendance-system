@@ -79,9 +79,9 @@ document.addEventListener("DOMContentLoaded", () => {
   eventForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const formData = new FormData(eventForm);
-    const tables = document.querySelector("table tbody");
 
     const eventData = Object.fromEntries(formData.entries());
+    const notifBar = document.getElementById("alert-check");
 
     try {
       const response = await fetch("http://localhost:3002/admin/event", {
@@ -94,29 +94,115 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (data.success) {
         eventForm.reset();
-        document.getElementById("alert-check").innerHTML = `
-        <h4>${data.message}</h4>`;
-        var row = tables.inserRow(tables.row.length);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
-        var cell5 = row.insertCell(4);
-        var cell6 = row.insertCell(5);
+        const tableBody = document.querySelector("table tbody");
 
-        cell1.insertHTML = `${data.title}`;
-        cell2.insertHTML = `${data.location}`;
-        cell3.insertHTML = `${data.startingSchoolYear}`;
-        cell4.insertHTML = `${data.endingSchoolYear}`;
-        cell5.insertHTML = `${data.timeBegin}`;
-        cell6.insertHTML = `${data.timeEnd}`;
+        const row = document.createElement("tr");
+        row.innerHTML = `
+        <td>${data.title}</td>
+        <td>${data.location}</td>
+        <td>${data.description}</td>
+        <td>${data.timeBegin}</td>
+        <td>${data.timeEnd}</td>
+        <td>${data.startingSchoolYear} - ${data.endingSchoolYear}</td>
+        <td><button class="btn-edit mb-1">Edit</button><button class="btn-delete mb-1">Delete</button><button class="btn-attendance">Attendance</button></td>`;
+
+        if (tableBody.firstChild) {
+          tableBody.insertBefore(row, tableBody.firstChild);
+        } else {
+          tableBody.appendChild(row);
+        }
+
+        if (tableBody.childElementCount > 10) {
+          tableBody.removeChild(tableBody.lastChild);
+        }
+
+        if (
+          notifBar.classList.contains("d-none") ||
+          notifBar.classList.contains("alert-danger")
+        ) {
+          notifBar.classList.remove("d-none");
+          notifBar.classList.remove("alert-danger");
+          notifBar.classList.add("alert-success");
+          notifBar.innerHTML = `<p>${data.message}</p>`;
+        } else {
+          notifBar.classList.add("alert-success");
+          notifBar.innerHTML = `<p>${data.message}</p>`;
+        }
       } else {
-        alert(`Error: ${data.message}`);
+        if (
+          notifBar.classList.contains("d-none") ||
+          notifBar.classList.contains("alert-success")
+        ) {
+          notifBar.classList.remove("d-none");
+          notifBar.classList.remove("alert-success");
+          notifBar.classList.add("alert-warning");
+          notifBar.innerHTML = `<p>${data.message}</p>`;
+        } else {
+          notifBar.classList.add("alert-warning");
+          notifBar.innerHTML = `<p>${data.message}</p>`;
+        }
       }
     } catch (error) {
       console.error(error);
-      document.getElementById("alert-check").innerText =
-        "Server error, Unable to create event.";
+      if (
+        notifBar.classList.contains("d-none") ||
+        notifBar.classList.contains("alert-success") ||
+        notifBar.classList.contains("alert-warning")
+      ) {
+        notifBar.classList.remove("d-none");
+        notifBar.classList.remove("alert-success");
+        notifBar.classList.remove("alert-warning");
+        notifBar.classList.add("alert-danger");
+        notifBar.innerHTML = `<p>${data.message}</p>`;
+      } else {
+        notifBar.classList.add("alert-danger");
+        notifBar.innerHTML = `<p>${data.message}</p>`;
+      }
+    }
+  });
+});
+
+// //button that delete events
+document.addEventListener("DOMContentLoaded", () => {
+  const tableBody = document.querySelector("table tbody");
+  tableBody.addEventListener("click", async (e) => {
+    if (e.target.classList.contains("btn-delete")) {
+      const row = e.target.closest("tr");
+      if (row) {
+        const id = row.querySelector("td:first-child").innerText;
+        const eventTitle = row.querySelector("td:nth-child(2)").innerText;
+
+        const isConfirmed = window.confirm(`Confirm Delete ${eventTitle}`);
+
+        if (isConfirmed) {
+          console.log("Deleting event with ID:", id);
+
+          try {
+            const response = await fetch(
+              `http://localhost:3002/admin/event/delete/${id}`,
+              {
+                method: "DELETE",
+              }
+            );
+
+            if (!response.ok) {
+              throw new Error("Unable to reach server");
+            }
+
+            const data = await response.json();
+            console.log("Delete response:", data);
+            row.remove();
+            // Additional logic if needed
+          } catch (error) {
+            console.error("Error fetching or deleting:", error);
+
+            const errorAlert = document.getElementById("alert-error");
+            errorAlert.innerText = error.message;
+            errorAlert.classList.remove("d-none");
+            // Additional error handling or UI updates
+          }
+        }
+      }
     }
   });
 });
