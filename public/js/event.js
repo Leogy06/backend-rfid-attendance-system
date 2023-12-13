@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-//fetching event to database
+//Get event upto 10 rows
 document.addEventListener("DOMContentLoaded", () => {
   const tableBody = document.querySelector("table tbody");
   let fetchData = async () => {
@@ -112,10 +112,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (
           notifBar.classList.contains("d-none") ||
-          notifBar.classList.contains("alert-danger")
+          notifBar.classList.contains("alert-danger") ||
+          notifBar.classList.contains("alert-warning")
         ) {
           notifBar.classList.remove("d-none");
           notifBar.classList.remove("alert-danger");
+          notifBar.classList.remove("alert-warning");
           notifBar.classList.add("alert-success");
           notifBar.innerHTML = `<p>${data.message}</p>`;
         } else {
