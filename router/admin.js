@@ -80,7 +80,9 @@ routes.post("/register", checkAuthenticated, async (req, res) => {
 
     await admin.save();
 
-    res.status(200).send({ message: "Registered", success: true });
+    res
+      .status(200)
+      .send({ message: `${admin.firstName} is Registered.`, success: true });
   } catch (error) {
     console.error(error.message);
     res.status(500).send({
@@ -163,13 +165,13 @@ routes.post("/event", checkAuthenticated, async (req, res) => {
     return res.status(200).send({
       message: "Event successfully created.",
       success: true,
-      title: newEvent.title,
-      location: newEvent.location,
-      startingSchoolYear: newEvent.startingSchoolYear,
-      endingSchoolYear: newEvent.endingSchoolYear,
-      description: newEvent.description,
-      timeBegin: newEvent.timeBegin,
-      timeEnd: newEvent.timeEnd,
+      title: event.title,
+      location: event.location,
+      startingSchoolYear: event.startingSchoolYear,
+      endingSchoolYear: event.endingSchoolYear,
+      description: event.description,
+      timeBegin: event.timeBegin,
+      timeEnd: event.timeEnd,
     });
   } catch (error) {
     console.error(error);
@@ -219,7 +221,7 @@ routes.put(
 );
 
 //delete an event
-routes.delete("/event/delete/:id", async (req, res) => {
+routes.delete("/event/delete/:id", checkAuthenticated, async (req, res) => {
   try {
     const { id } = req.params;
     const result = await Events.findByIdAndDelete(id);
@@ -237,6 +239,35 @@ routes.delete("/event/delete/:id", async (req, res) => {
     res
       .status(500)
       .json({ error: error, message: "Can't delete due to server error" });
+  }
+});
+
+//routes for attendees
+routes.get("/event/attendees/:id", checkAuthenticated, async (req, res) => {
+  const { id } = req.params;
+  const event = await Events.findById(id);
+
+  try {
+    if (!event) {
+      return res.status(400).send({ message: "No such event exist" });
+    } else {
+      return res.status(200).send({
+        success: true,
+        title: event.title,
+        startingSchoolYear: event.startingSchoolYear,
+        endingSchoolYear: event.endingSchoolYear,
+        timeBegin: event.timeBegin,
+        timeEnd: event.timeEnd,
+        location: event.location,
+        attendees: event.attendees,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      message: "Can't fetch the server",
+      error: error.message,
+    });
   }
 });
 

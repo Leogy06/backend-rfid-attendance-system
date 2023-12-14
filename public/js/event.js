@@ -1,3 +1,5 @@
+const baseURL = "http://localhost:3002";
+
 //buttons functionalities
 document.addEventListener("DOMContentLoaded", () => {
   const eventContainer = document.getElementById("event-container");
@@ -58,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${formattedTimeStarting}</td>
         <td>${formattedTimeEnding}</td>
         <td>${event.startingSchoolYear} - ${event.endingSchoolYear} </td>
-        <td><button class="btn-edit mb-1">Edit</button><button class="btn-delete mb-1">Delete</button><button class="btn-attendance">Attendance</button></td>
+        <td><button class="btn-edit mb-1">Edit</button><button class="btn-delete mb-1">Delete</button><button class="btn-attendance" onclick="attendanceButton()">Attendance</button></td>
       `;
       tableBody.appendChild(row);
     });
@@ -198,6 +200,22 @@ document.addEventListener("DOMContentLoaded", () => {
             // Additional error handling or UI updates
           }
         }
+      }
+    }
+  });
+});
+
+//display attendees
+document.addEventListener("DOMContentLoaded", () => {
+  const tableBody = document.querySelector("table tbody");
+
+  tableBody.addEventListener("click", async (e) => {
+    if (e.target.classList.contains("btn-attendance")) {
+      const row = e.target.closest("tr");
+
+      if (row) {
+        const eventId = row.querySelector("td:first-child").innerText;
+        window.location = `/admin/event/attendees/${eventId}`;
       }
     }
   });

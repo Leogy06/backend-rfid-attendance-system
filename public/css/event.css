@@ -337,3 +337,6 @@ a[aria-current="page"] {
 #btn-event-container {
   justify-content: center;
 }
+#alert-top {
+  z-index: 2;
+}
