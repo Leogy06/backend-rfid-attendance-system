@@ -159,7 +159,6 @@ routes.post("/event", checkAuthenticated, async (req, res) => {
     };
 
     const event = await Events.create(newEvent);
-    console.log(event);
 
     return res.status(200).send({
       message: "Event successfully created.",
