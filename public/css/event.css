@@ -340,3 +340,23 @@ a[aria-current="page"] {
 #alert-top {
   z-index: 2;
 }
+#id-container {
+  margin: 1rem 0 0 1rem;
+  color: #33333379;
+}
+#alert-rfid {
+  height: 10px;
+}
+#alert-attendees {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fa-face-laugh-beam {
+  font-size: 40px;
+}
+#alert-span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

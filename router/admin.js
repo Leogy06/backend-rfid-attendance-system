@@ -165,6 +165,7 @@ routes.post("/event", checkAuthenticated, async (req, res) => {
     return res.status(200).send({
       message: "Event successfully created.",
       success: true,
+      evntId: event._id,
       title: event.title,
       location: event.location,
       startingSchoolYear: event.startingSchoolYear,
@@ -210,12 +211,20 @@ routes.put(
         { $push: { attendees: { $each: [newAttendees] } } }
       );
 
-      console.log(updateResult);
-
-      res.status(200).send({ message: `Welcome ${student.firstName}` });
+      res.status(200).send({
+        success: true,
+        message: `Welcome ${student.firstName}`,
+        result: updateResult,
+        name: newAttendees.studentName,
+        year: newAttendees.year,
+        department: newAttendees.department,
+        course: newAttendees.course,
+        status: newAttendees.status,
+        timeIn: newAttendees.timeIn,
+      });
     } catch (error) {
       console.error(error);
-      res.send({ message: "Server problem upon creating attendees" });
+      res.status(500).send({ message: "Internal Server Error" });
     }
   }
 );

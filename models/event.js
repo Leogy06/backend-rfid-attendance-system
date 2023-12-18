@@ -35,6 +35,7 @@ const eventSchema = new mongoose.Schema(
         studentName: {
           type: String,
           required: false,
+          unique: true,
         },
         year: {
           type: String,

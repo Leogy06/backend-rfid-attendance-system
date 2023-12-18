@@ -110,11 +110,99 @@
                   <th>Operation</th>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody id="event-table-body"></tbody>
             </table>
           </div>
         </section>
       </section>
+
+      <!---Modal screen-->
+      <!-- Full screen modal -->
+      <div
+        class="modal fade"
+        id="fullScreenModal"
+        tabindex="-1"
+        aria-labelledby="fullScreenModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="fullScreenModalLabel"></h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-header">
+              <h6
+                class="modal-description"
+                id="fullScreenModalDescription"
+              ></h6>
+            </div>
+            <div class="modal-body">
+              <div
+                class="alert d-flex align-items-center text-center alert-container"
+                role="alert"
+                id="alert-attendees"
+              ></div>
+              <!-- Content goes here -->
+              <form method="post" id="rfid-form">
+                <div class="input-group mb-3">
+                  <button
+                    class="btn btn-success"
+                    type="submit"
+                    id="button-addon1"
+                  >
+                    Login
+                  </button>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder=""
+                    aria-label="Example text with button addon"
+                    aria-describedby="button-addon1"
+                    id="rfid"
+                    name="rfid"
+                  />
+                </div>
+              </form>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Year</th>
+                    <th>Course</th>
+                    <th>Department</th>
+                    <th>Status</th>
+                    <th>Timein</th>
+                    <th>Timeout</th>
+                  </tr>
+                </thead>
+                <tbody id="rfid-table-body"></tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <div class="position-absolute bottom-0 start-0" id="id-container">
+                <h6
+                  class="modal-event-id float-start"
+                  id="fullScreenModalDescription"
+                ></h6>
+              </div>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <!-- Additional buttons can be added here if needed -->
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div
         id="event-container"
@@ -220,6 +308,9 @@
         </form>
       </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="/js/event.js"></script>
   </body>
 </html>
