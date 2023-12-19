@@ -360,3 +360,9 @@ a[aria-current="page"] {
   justify-content: center;
   align-items: center;
 }
+.btn-container {
+  background-color: #fff;
+}
+.btn-edit {
+  color: #4fb9af;
+}

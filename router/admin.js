@@ -280,4 +280,42 @@ routes.get("/event/attendees/:id", checkAuthenticated, async (req, res) => {
   }
 });
 
+//event edit
+routes.put("/event/edit/:id", checkAuthenticated, async (req, res) => {
+  const { id } = req.params;
+  const title = req.body.title;
+  const location = req.body.location;
+  const description = req.body.description;
+  const timeBegin = req.body.timeBegin;
+  const timeEnd = req.body.timeEnd;
+  const startingSchoolYear = req.body.startingSchoolYear;
+  const endingSchoolYear = req.body.endingSchoolYear;
+
+  const event = await Events.findById(id);
+  try {
+    if (!event) {
+      return res.status(404).send({ message: "Event not found" });
+    }
+    const updatedEvent = {};
+
+    if (title) updatedEvent.title = title;
+    if (location) updatedEvent.location = location;
+    if (description) updatedEvent.description = description;
+    if (timeBegin) updatedEvent.timeBegin = timeBegin;
+    if (timeEnd) updatedEvent.timeEnd = timeEnd;
+    if (startingSchoolYear)
+      updatedEvent.startingSchoolYear = startingSchoolYear;
+    if (endingSchoolYear) updatedEvent.endingSchoolYear = endingSchoolYear;
+
+    const newEventUpdate = await Events.updateOne(
+      { _id: id },
+      { $set: updatedEvent }
+    );
+
+    return res.status(200).send([newEventUpdate, updatedEvent]);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 export { routes as adminRoutes };

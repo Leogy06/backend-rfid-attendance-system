@@ -60,11 +60,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${formattedTimeStarting}</td>
         <td>${formattedTimeEnding}</td>
         <td>${event.startingSchoolYear} - ${event.endingSchoolYear} </td>
-        <td><button class="btn-edit mb-1">Edit</button>
-        <button class="btn-delete mb-1">Delete</button>
-        <button type="button" class="btn btn-outline-success btn-attendance" data-bs-toggle="modal" data-bs-target="#fullScreenModal">
-        Attendance
-        </button>
+        <div class="btn-container">
+          <button type="button" class="btn btn-primary btn-edit mb-1" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Edit</button>
+          <button class="btn-delete mb-1">Delete</button>
+          <button type="button" class="btn btn-outline-success btn-attendance" data-bs-toggle="modal" data-bs-target="#fullScreenModal">
+          Attendance
+          </button>
+        </div>
         </td>
       `;
       ``;
@@ -107,11 +109,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${data.timeEnd}</td>
         <td>${data.startingSchoolYear} - ${data.endingSchoolYear}</td>
         <td>
-        <button class="btn-edit mb-1">Edit</button>
-        <button class="btn-delete mb-1">Delete</button>
-        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#fullScreenModal">
-        Attendance
-        </button>
+        <div class="btn-container">
+          <button type="button" class="btn btn-primary btn-edit mb-1" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Edit</button>
+          <button class="btn-delete mb-1">Delete</button>
+          <button type="button" class="btn btn-outline-success btn-attendance" data-bs-toggle="modal" data-bs-target="#fullScreenModal">
+          Attendance
+          </button>
+        </div>
         </td>`;
 
         if (tableBody.firstChild) {
@@ -424,6 +428,49 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (error) {
       console.error(error);
       alert("Server Error, please see console");
+    }
+  });
+
+  //edit-button for event
+  document.getElementById("event-table-body").addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn-edit")) {
+      const row = e.target.closest("tr");
+
+      if (row) {
+        const id = row.querySelector("td:first-child").innerText;
+
+        // Add a listener to the form inside the modal
+        const updateEventForm = document.getElementById("event-update-form");
+        updateEventForm.addEventListener("submit", async (formEvent) => {
+          formEvent.preventDefault(); // Prevent the default form submission
+
+          const formData = new FormData(updateEventForm);
+          const updatedData = Object.fromEntries(formData.entries());
+
+          try {
+            const response = await fetch(`${baseURL}/admin/event/edit/${id}`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(updatedData),
+            });
+            const data = await response.json();
+
+            if (response.ok) {
+              console.log(data.message);
+              alert("Updated Successfully");
+              alert("Refresh the page to see updated result");
+              updateEventForm.reset();
+            } else {
+              alert("Error Updating Event");
+            }
+            console.log(data);
+          } catch (error) {
+            console.error(error);
+          }
+        });
+      }
     }
   });
 });

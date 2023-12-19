@@ -307,6 +307,127 @@
           </div>
         </form>
       </div>
+
+      <!--modal for edit-->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Update Event <br />
+                <p style="color: #333; font-size: 13px">
+                  You can leave it blank to fields that unnecessary to be change
+                </p>
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form id="event-update-form">
+                <div class="mb-3">
+                  <label for="title" class="col-form-label">Title:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    name="title"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="description" class="col-form-label"
+                    >Description:</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="description"
+                    name="description"
+                  ></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="location" class="col-form-label">Location:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="location"
+                    name="location"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="timeBegin" class="col-form-label"
+                    >Date Begin:</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="timeBegin"
+                    name="timeBegin"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="timeEnd" class="col-form-label">Date end:</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="timeEnd"
+                    name="timeEnd"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="startingSchoolYear" class="col-form-label"
+                    >Starting School Year:</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="startingSchoolYear"
+                    name="startingSchoolYear"
+                    placeholder="e.g. 2023"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="endingSchoolYear" class="col-form-label"
+                    >Ending School Year:</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="endingSchoolYear"
+                    name="endingSchoolYear"
+                    placeholder="e.g. 2024"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  class="btn btn-outline-info"
+                  id="submit-edited-event"
+                >
+                  Submit Changes
+                </button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
