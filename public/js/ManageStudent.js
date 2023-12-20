@@ -81,6 +81,8 @@ document.addEventListener("DOMContentLoaded", () => {
 // Function to open create student form
 function createStudent() {
   document.getElementById("overlay").style.display = "flex";
+  const studentForm = document.getElementById("create-form");
+  studentForm.reset();
 }
 // Function to close create student form
 function closeForm() {

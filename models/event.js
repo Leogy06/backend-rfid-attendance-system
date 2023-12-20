@@ -32,10 +32,13 @@ const eventSchema = new mongoose.Schema(
     },
     attendees: [
       {
+        studentId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "students",
+        },
         studentName: {
           type: String,
           required: false,
-          unique: true,
         },
         year: {
           type: String,

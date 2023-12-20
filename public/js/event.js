@@ -79,7 +79,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //creating event
 document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("close-btn").addEventListener("click", () => {
+    location.reload();
+  });
   const eventForm = document.getElementById("event");
+
+  const tableBody = document.querySelector("table tbody");
   eventForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const formData = new FormData(eventForm);
@@ -98,15 +103,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (data.success) {
         eventForm.reset();
-        const tableBody = document.querySelector("table tbody");
+
+        const formatedDateStart = new Intl.DateTimeFormat("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          timeZone: "UTC",
+        }).format(new Date(data.timeBegin));
+
+        const formattedDateEnd = new Intl.DateTimeFormat("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          timeZone: "UTC",
+        }).format(new Date(data.timeEnd));
 
         const row = document.createElement("tr");
         row.innerHTML = `
+        <td style="display:none;">${data.evntId}</td>
         <td>${data.title}</td>
         <td>${data.location}</td>
         <td>${data.description}</td>
-        <td>${data.timeBegin}</td>
-        <td>${data.timeEnd}</td>
+        <td>${formatedDateStart}</td>
+        <td>${formattedDateEnd}</td>
         <td>${data.startingSchoolYear} - ${data.endingSchoolYear}</td>
         <td>
         <div class="btn-container">
@@ -167,10 +186,10 @@ document.addEventListener("DOMContentLoaded", () => {
         notifBar.classList.remove("alert-success");
         notifBar.classList.remove("alert-warning");
         notifBar.classList.add("alert-danger");
-        notifBar.innerHTML = `<p>${data.message}</p>`;
+        notifBar.innerHTML = `<p>${error}</p>`;
       } else {
         notifBar.classList.add("alert-danger");
-        notifBar.innerHTML = `<p>${data.message}</p>`;
+        notifBar.innerHTML = `<p>${error}</p>`;
       }
     }
   });
@@ -227,6 +246,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const tableBody = document.getElementById("event-table-body");
   const tableBodyRfid = document.getElementById("rfid-table-body");
   tableBody.addEventListener("click", async (e) => {
+    //if attendance btn click, it will clear alert box
+    document.getElementById("alert-attendees").innerHTML = "";
+
     if (e.target.classList.contains("btn-attendance")) {
       const row = e.target.closest("tr");
       if (row) {
@@ -321,7 +343,6 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     const eventAttendanceId = document.getElementById("event-id").innerText;
     const attendeeRfid = document.getElementById("rfid").value;
-
     try {
       const response = await fetch(
         `${baseURL}/admin/event/attendees/timeIn/${eventAttendanceId}`,
@@ -460,8 +481,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (response.ok) {
               console.log(data.message);
               alert("Updated Successfully");
-              alert("Refresh the page to see updated result");
               updateEventForm.reset();
+              location.reload();
             } else {
               alert("Error Updating Event");
             }

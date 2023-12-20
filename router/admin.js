@@ -199,6 +199,7 @@ routes.put(
       };
 
       const newAttendees = {
+        email: student.email,
         studentName: sFullName(),
         year: student.year,
         course: student.course,
